@@ -1,5 +1,6 @@
 #!/bin/bash
-git clone https://github.com/42Cyber/reversing.git $HOME/reversing
+set -e
+git clone https://github.com/42Cyber/reversing.git $HOME/reversing || true
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 code $HOME/reversing
 brew --version || rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
@@ -17,6 +18,9 @@ fi
 hdiutil attach -mountpoint $MOUNTPOINT bn.dmg
 
 for app in `find $MOUNTPOINT -type d -maxdepth 2 -name \*.app `; do
+    if [ -d /sgoinfre/students/$USER/binary_ninja/ ]; then
+        continue
+    fi
     mkdir -p /sgoinfre/students/$USER/binary_ninja/
     echo "installing $(basename $app)"
     cp -a $MOUNTPOINT/*.app /sgoinfre/students/$USER/binary_ninja/Binary_ninja.app
@@ -25,6 +29,6 @@ for app in `find $MOUNTPOINT -type d -maxdepth 2 -name \*.app `; do
 done
 killall Dock
 open /sgoinfre/students/$USER/binary_ninja/
-hdiutil detach $MOUNTPOINT
+hdiutil detach $MOUNTPOINT || true
 rm bn.dmg
 echo "FINISHED!!"
