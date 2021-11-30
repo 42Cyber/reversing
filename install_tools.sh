@@ -4,7 +4,8 @@ git clone https://github.com/42Cyber/reversing.git $HOME/reversing || true
 code () { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
 code $HOME/reversing
 brew --version || rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
-docker --version || brew install docker
+. ~/.zshrc
+docker --version || brew install docker && brew install --Cask Docker
 docker info 2>/dev/null || open -g -a Docker
 MOUNTPOINT="/Volumes/MountPoint"
 IFS="
