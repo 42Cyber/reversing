@@ -27,5 +27,4 @@ killall Dock
 open /sgoinfre/students/$USER/binary_ninja/
 hdiutil detach $MOUNTPOINT
 rm bn.dmg
-docker pull darodrig/devimage
 echo "FINISHED!!"
